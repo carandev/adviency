@@ -30,7 +30,6 @@
   flex-direction: column;
   justify-content: space-between;
   min-width: 400px;
-  height: 450px;
 
   margin-right: 20vw;
   padding: 2rem;
@@ -83,6 +82,7 @@
 .mainLi {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 
   margin-bottom: 1rem;
@@ -96,6 +96,7 @@
   justify-self: center;
   padding: 0.5rem 1rem;
   margin-left: 1rem;
+  height: fit-content;
 
   border: none;
   border-radius: 5px;
@@ -130,6 +131,6 @@
 }
 
 .mainImg {
-  width: 100px;
+  width: 40px;
   margin-right: 1rem;
 }
