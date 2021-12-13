@@ -6,6 +6,7 @@ const FormToAdd = ({setShowForm}) => {
   let [giftName, setGiftName] = useState('')
   let [quantity, setQuantity] = useState(1)
   let [imgUrl, setImgUrl] = useState('')
+  let [namePerson, setNamePerson] = useState('')
 
   const handleChange = (event) => {
     const {value, name} = event.target
@@ -15,6 +16,8 @@ const FormToAdd = ({setShowForm}) => {
       setQuantity(value)
     } else if (name === 'imgUrl') {
       setImgUrl(value)
+    } else {
+      setNamePerson(value)
     }
   }
 
@@ -25,6 +28,7 @@ const FormToAdd = ({setShowForm}) => {
 
     const gift = {
       name: newName,
+      namePerson,
       quantity,
       img: imgUrl
     }
@@ -60,6 +64,14 @@ const FormToAdd = ({setShowForm}) => {
         onChange={handleChange}
         className={styles.mainInput}
         placeholder="URL de la imagen"
+      />
+      <input
+        type="text"
+        name="namePerson"
+        value={namePerson}
+        onChange={handleChange}
+        className={styles.mainInput}
+        placeholder="¿Para quién?"
       />
       <input
         type="number"

@@ -8,7 +8,13 @@ function App() {
   let [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
+
+    if(!localStorage.getItem('gifts')) {
+      localStorage.setItem('gifts', JSON.stringify([]))
+    }
+
     getGifts()
+
   }, [showForm])
 
   const getGifts = () => {
@@ -47,13 +53,16 @@ function App() {
           {gifts.length !== 0 && <ul className={styles.mainUl}>
             {gifts.map((gift, index) => (
               <li className={styles.mainLi}>
-                <div className={styles.liContainerImg}>
+                <div className={styles.liContainer}>
                   <img
                     src={gift.img}
-                    alt="Product image"
+                    alt="Product"
                     className={styles.mainImg}
                   />
-                  {gift.name} x{gift.quantity}
+                  <span>
+                    <p>{gift.name} x{gift.quantity}</p>
+                    <small>Para: {gift.namePerson}</small>
+                  </span>
                 </div>
                 <button
                   className={styles.deleteButton}

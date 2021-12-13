@@ -125,9 +125,23 @@
   color: #fff;
 }
 
-.liContainerImg {
+.liContainer {
   display: flex;
   align-items: center;
+}
+
+.liContainer p {
+  margin: 0;
+}
+
+.liContainer span {
+  display: flex;
+  flex-direction: column;
+}
+
+.liContainer small {
+  color: #aaa;
+  font-size: .8rem;
 }
 
 .mainImg {
