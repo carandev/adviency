@@ -1,12 +1,21 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from "./FormToAdd.module.css";
 
-const FormToAdd = ({setShowForm}) => {
+const FormToAdd = ({setShowForm, edit, gift}) => {
 
   let [giftName, setGiftName] = useState('')
   let [quantity, setQuantity] = useState(1)
   let [imgUrl, setImgUrl] = useState('')
   let [namePerson, setNamePerson] = useState('')
+
+  useEffect(() => {
+    if (edit) {
+      setGiftName(gift.name)
+      setQuantity(gift.quantity)
+      setImgUrl(gift.img)
+      setNamePerson(gift.namePerson)
+    }
+  }, [edit, gift])
 
   const handleChange = (event) => {
     const {value, name} = event.target
@@ -27,6 +36,7 @@ const FormToAdd = ({setShowForm}) => {
     const giftsLocalStorage = JSON.parse(localStorage.getItem('gifts'))
 
     const gift = {
+      id: Date.now(),
       name: newName,
       namePerson,
       quantity,
@@ -45,6 +55,22 @@ const FormToAdd = ({setShowForm}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+  }
+
+  const handleEdit = () => {
+    const temporalGifts = JSON.parse(localStorage.getItem('gifts'))
+
+    temporalGifts.forEach(giftNew => {
+      if (giftNew.id === gift.id) {
+        giftNew.name = giftName
+        giftNew.namePerson = namePerson
+        giftNew.quantity = quantity
+        giftNew.img = imgUrl
+      }
+    })
+
+    localStorage.setItem('gifts', JSON.stringify(temporalGifts))
+    setShowForm(false)
   }
 
   return (
@@ -81,15 +107,15 @@ const FormToAdd = ({setShowForm}) => {
         onChange={handleChange}
       />
       <div>
+        {edit ?
+          <button className={styles.mainButton} onClick={handleEdit}>Editar</button>
+          :
+          <button className={styles.mainButton} onClick={handleClick}>Agregar</button>
+        }
         <button
-          onClick={handleClick}
+          onClick={event => {setShowForm(lastState => !lastState)}}
           className={styles.mainButton}
-        >
-          Agregar
-        </button>
-        <button
-          onClick={() => setShowForm(lastState => !lastState)}
-          className={styles.mainButton}
+          type="button"
         >
           Cancelar
         </button>

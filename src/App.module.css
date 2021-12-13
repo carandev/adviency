@@ -125,21 +125,21 @@
   color: #fff;
 }
 
-.liContainer {
+.liContainerData {
   display: flex;
   align-items: center;
 }
 
-.liContainer p {
+.liContainerData p {
   margin: 0;
 }
 
-.liContainer span {
+.liContainerData span {
   display: flex;
   flex-direction: column;
 }
 
-.liContainer small {
+.liContainerData small {
   color: #aaa;
   font-size: .8rem;
 }

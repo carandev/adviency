@@ -4,8 +4,10 @@ import FormToAdd from "./components/FormToAdd";
 
 function App() {
 
-  let [gifts, setGifts] = useState([])
-  let [showForm, setShowForm] = useState(false)
+  const [gifts, setGifts] = useState([])
+  const [showForm, setShowForm] = useState(false)
+  const [edit, setEdit] = useState(false)
+  const [gift, setGift] = useState({})
 
   useEffect(() => {
 
@@ -35,11 +37,17 @@ function App() {
     getGifts()
   }
 
+  const handleEdit = index => {
+    setGift(gifts[index])
+    setEdit(true)
+    setShowForm(true)
+  }
+
   return (
     <main className={styles.main}>
       {showForm && <>
         <div className={styles.mainShadow}> </div>
-        <FormToAdd setShowForm={setShowForm}/>
+        <FormToAdd setShowForm={setShowForm} edit={edit} gift={gift}/>
       </>}
         <div className={styles.mainCard}>
           <h1 className={styles.mainH1}>Adviency</h1>
@@ -52,8 +60,8 @@ function App() {
           </button>
           {gifts.length !== 0 && <ul className={styles.mainUl}>
             {gifts.map((gift, index) => (
-              <li className={styles.mainLi}>
-                <div className={styles.liContainer}>
+              <li key={gift.id} className={styles.mainLi}>
+                <div className={styles.liContainerData}>
                   <img
                     src={gift.img}
                     alt="Product"
@@ -64,12 +72,20 @@ function App() {
                     <small>Para: {gift.namePerson}</small>
                   </span>
                 </div>
-                <button
-                  className={styles.deleteButton}
-                  onClick={() => handleDelete(index)}
-                >
-                  X
-                </button>
+                <div>
+                  <button
+                    className={styles.mainButton}
+                    onClick={() => handleEdit(index)}
+                  >
+                    E
+                  </button>
+                  <button
+                    className={styles.deleteButton}
+                    onClick={() => handleDelete(index)}
+                  >
+                    X
+                  </button>
+                </div>
               </li>
             ))}
           </ul>}
