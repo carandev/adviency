@@ -3,10 +3,10 @@ import styles from "./FormToAdd.module.css";
 
 const FormToAdd = ({setShowForm, edit, gift}) => {
 
-  let [giftName, setGiftName] = useState('')
-  let [quantity, setQuantity] = useState(1)
-  let [imgUrl, setImgUrl] = useState('')
-  let [namePerson, setNamePerson] = useState('')
+  const [giftName, setGiftName] = useState('')
+  const [quantity, setQuantity] = useState(1)
+  const [imgUrl, setImgUrl] = useState('')
+  const [namePerson, setNamePerson] = useState('')
 
   useEffect(() => {
     if (edit) {
@@ -15,6 +15,7 @@ const FormToAdd = ({setShowForm, edit, gift}) => {
       setImgUrl(gift.img)
       setNamePerson(gift.namePerson)
     }
+
   }, [edit, gift])
 
   const handleChange = (event) => {
@@ -73,6 +74,10 @@ const FormToAdd = ({setShowForm, edit, gift}) => {
     setShowForm(false)
   }
 
+  const handleRandom = () => {
+      
+  }
+
   return (
     <form onSubmit={handleSubmit} className={styles.mainForm}>
       <input
@@ -82,7 +87,9 @@ const FormToAdd = ({setShowForm, edit, gift}) => {
         onChange={handleChange}
         className={styles.mainInput}
         placeholder="Nombre del regalo"
+        autoFocus
       />
+      <button onClick={handleRandom}>random</button>
       <input
         type="text"
         name="imgUrl"

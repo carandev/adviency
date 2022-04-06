@@ -1,6 +1,7 @@
 import styles from './App.module.css';
 import {useEffect, useState} from "react";
 import FormToAdd from "./components/FormToAdd";
+import api from "./service/api"
 
 function App() {
 
@@ -8,19 +9,23 @@ function App() {
   const [showForm, setShowForm] = useState(false)
   const [edit, setEdit] = useState(false)
   const [gift, setGift] = useState({})
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
 
     if(!localStorage.getItem('gifts')) {
-      localStorage.setItem('gifts', JSON.stringify([]))
+      api.postGifts([])
     }
 
-    getGifts()
+    api.getGifts().then(newGifts => {
+      setLoading(false)
+      setGifts(newGifts)
+    })
 
   }, [showForm])
 
-  const getGifts = () => {
-    setGifts(JSON.parse(localStorage.getItem('gifts')))
+  const getGifts = async() => {
+    return await JSON.parse(localStorage.getItem('gifts'))
   }
 
 
@@ -49,6 +54,7 @@ function App() {
         <div className={styles.mainShadow}> </div>
         <FormToAdd setShowForm={setShowForm} edit={edit} gift={gift}/>
       </>}
+      {loading ? 'cargando' :
         <div className={styles.mainCard}>
           <h1 className={styles.mainH1}>Adviency</h1>
           <h3 className={styles.mainH3}>Lista de Regalos</h3>
@@ -100,6 +106,7 @@ function App() {
           </button>
 
       </div>
+      }
     </main>
   );
 }
