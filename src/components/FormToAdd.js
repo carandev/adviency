@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import styles from "./FormToAdd.module.css";
+import randomGifts from "../randomGifts";
+import api from "../service/api";
 
-const FormToAdd = ({setShowForm, edit, gift}) => {
+const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
 
   const [giftName, setGiftName] = useState('')
   const [quantity, setQuantity] = useState(1)
@@ -31,10 +33,10 @@ const FormToAdd = ({setShowForm, edit, gift}) => {
     }
   }
 
-  const handleClick = () => {
+  const handleClick = async () => {
     let newName = giftName.trim()
 
-    const giftsLocalStorage = JSON.parse(localStorage.getItem('gifts'))
+    let giftsLocalStorage = await api.getGifts()
 
     const gift = {
       id: Date.now(),
@@ -45,7 +47,7 @@ const FormToAdd = ({setShowForm, edit, gift}) => {
     }
 
     if (newName.length > 0 && !giftsLocalStorage.some(gift => gift.name === newName)) {
-      localStorage.setItem('gifts', JSON.stringify([...giftsLocalStorage, gift]))
+      api.postGifts([...giftsLocalStorage, gift])
       setGiftName('')
       setImgUrl('')
       setQuantity(1)
@@ -71,11 +73,19 @@ const FormToAdd = ({setShowForm, edit, gift}) => {
     })
 
     localStorage.setItem('gifts', JSON.stringify(temporalGifts))
+    setGiftName('')
+    setImgUrl('')
+    setQuantity(1)
     setShowForm(false)
+    setEdit(false)
   }
 
   const handleRandom = () => {
-      
+   const randomGift = randomGifts[Math.floor(Math.random() * randomGifts.length)]
+    setGiftName(randomGift.name)
+    setNamePerson(randomGift.namePerson)
+    setImgUrl(randomGift.img)
+    setQuantity(randomGift.quantity)
   }
 
   return (
@@ -89,7 +99,12 @@ const FormToAdd = ({setShowForm, edit, gift}) => {
         placeholder="Nombre del regalo"
         autoFocus
       />
-      <button onClick={handleRandom}>random</button>
+      <button
+        onClick={handleRandom}
+        className="mainButton"
+      >
+        Regalo Aleatorio
+      </button>
       <input
         type="text"
         name="imgUrl"
@@ -115,13 +130,13 @@ const FormToAdd = ({setShowForm, edit, gift}) => {
       />
       <div>
         {edit ?
-          <button className={styles.mainButton} onClick={handleEdit}>Editar</button>
+          <button className="mainButton" onClick={handleEdit}>Editar</button>
           :
-          <button className={styles.mainButton} onClick={handleClick}>Agregar</button>
+          <button className="mainButton" onClick={handleClick}>Agregar</button>
         }
         <button
           onClick={event => {setShowForm(lastState => !lastState)}}
-          className={styles.mainButton}
+          className="deleteButton"
           type="button"
         >
           Cancelar

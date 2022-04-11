@@ -2,6 +2,7 @@ import styles from './App.module.css';
 import {useEffect, useState} from "react";
 import FormToAdd from "./components/FormToAdd";
 import api from "./service/api"
+import Gift from "./components/Gift";
 
 function App() {
 
@@ -24,22 +25,21 @@ function App() {
 
   }, [showForm])
 
-  const getGifts = async() => {
-    return await JSON.parse(localStorage.getItem('gifts'))
-  }
-
-
   const handleDelete = (index) => {
     const newGifts = [...gifts]
     newGifts.splice(index, 1)
 
     localStorage.setItem('gifts', JSON.stringify(newGifts))
-    getGifts()
+    api.getGifts().then(newGifts => {
+      setGifts(newGifts)
+    })
   }
 
   const deleteAll = () => {
     localStorage.setItem('gifts', JSON.stringify([]))
-    getGifts()
+    api.getGifts().then(newGifts => {
+      setGifts(newGifts)
+    })
   }
 
   const handleEdit = index => {
@@ -52,7 +52,7 @@ function App() {
     <main className={styles.main}>
       {showForm && <>
         <div className={styles.mainShadow}> </div>
-        <FormToAdd setShowForm={setShowForm} edit={edit} gift={gift}/>
+        <FormToAdd setShowForm={setShowForm} edit={edit} setEdit={setEdit} gift={gift}/>
       </>}
       {loading ? 'cargando' :
         <div className={styles.mainCard}>
@@ -60,39 +60,19 @@ function App() {
           <h3 className={styles.mainH3}>Lista de Regalos</h3>
           <button
             onClick={() => setShowForm((prevState => !prevState))}
-            className={styles.mainButton}
+            className="mainButton"
           >
             Añadir Regalo
           </button>
           {gifts.length !== 0 && <ul className={styles.mainUl}>
             {gifts.map((gift, index) => (
-              <li key={gift.id} className={styles.mainLi}>
-                <div className={styles.liContainerData}>
-                  <img
-                    src={gift.img}
-                    alt="Product"
-                    className={styles.mainImg}
-                  />
-                  <span>
-                    <p>{gift.name} x{gift.quantity}</p>
-                    <small>Para: {gift.namePerson}</small>
-                  </span>
-                </div>
-                <div>
-                  <button
-                    className={styles.mainButton}
-                    onClick={() => handleEdit(index)}
-                  >
-                    E
-                  </button>
-                  <button
-                    className={styles.deleteButton}
-                    onClick={() => handleDelete(index)}
-                  >
-                    X
-                  </button>
-                </div>
-              </li>
+              <Gift
+                key={index}
+                gift={gift}
+                index={index}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+              />
             ))}
           </ul>}
           {gifts.length === 0 && (
@@ -100,7 +80,7 @@ function App() {
           )}
           <button
             onClick={deleteAll}
-            className={styles.deleteButton}
+            className="deleteButton"
           >
             Borrar lista
           </button>
