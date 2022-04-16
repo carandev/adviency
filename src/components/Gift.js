@@ -1,5 +1,5 @@
 import React from 'react';
-import StyleGiftContainer from './StyleGiftContainer.module.css';
+import StyleGiftContainer from './StyleGift.module.css';
 
 const Gift = ({gift, handleEdit, index, handleDelete}) => {
   return (

@@ -88,6 +88,15 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
     setQuantity(randomGift.quantity)
   }
 
+  const handleCancel = event => {
+    setShowForm(lastState => !lastState)
+    setGiftName('')
+    setImgUrl('')
+    setQuantity(1)
+    setShowForm(false)
+    setEdit(false)
+  }
+
   return (
     <form onSubmit={handleSubmit} className={styles.mainForm}>
       <input
@@ -135,7 +144,7 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
           <button className="mainButton" onClick={handleClick}>Agregar</button>
         }
         <button
-          onClick={event => {setShowForm(lastState => !lastState)}}
+          onClick={handleCancel}
           className="deleteButton"
           type="button"
         >
