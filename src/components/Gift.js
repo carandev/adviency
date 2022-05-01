@@ -12,9 +12,9 @@ const Gift = ({gift, handleEdit, index, handleDelete}) => {
             className={StyleGiftContainer.mainImg}
           />
           <span>
-                    <p>{gift.name} x{gift.quantity}</p>
-                    <small>Para: {gift.namePerson}</small>
-                  </span>
+            <p>{gift.name} x{gift.quantity} - ${gift.price}</p>
+            <small>Para: {gift.namePerson}</small>
+          </span>
         </div>
         <div className={StyleGiftContainer.liButtons}>
           <button

@@ -9,18 +9,20 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
   const [quantity, setQuantity] = useState(1)
   const [imgUrl, setImgUrl] = useState('')
   const [namePerson, setNamePerson] = useState('')
+  const [price, setPrice] = useState(0)
 
   useEffect(() => {
     if (edit) {
       setGiftName(gift.name)
       setQuantity(gift.quantity)
       setImgUrl(gift.img)
+      setPrice(gift.price)
       setNamePerson(gift.namePerson)
     }
 
   }, [edit, gift])
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     const {value, name} = event.target
     if (name === 'giftName') {
       setGiftName(value)
@@ -28,8 +30,10 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
       setQuantity(value)
     } else if (name === 'imgUrl') {
       setImgUrl(value)
-    } else {
+    } else if (name === 'namePerson'){
       setNamePerson(value)
+    } else {
+      setPrice(value)
     }
   }
 
@@ -43,6 +47,7 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
       name: newName,
       namePerson,
       quantity,
+      price: price * quantity,
       img: imgUrl
     }
 
@@ -50,6 +55,7 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
       api.postGifts([...giftsLocalStorage, gift])
       setGiftName('')
       setImgUrl('')
+      setPrice(0)
       setQuantity(1)
       setShowForm(false)
     }
@@ -68,6 +74,7 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
         giftNew.name = giftName
         giftNew.namePerson = namePerson
         giftNew.quantity = quantity
+        giftNew.price = price * quantity
         giftNew.img = imgUrl
       }
     })
@@ -75,6 +82,7 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
     localStorage.setItem('gifts', JSON.stringify(temporalGifts))
     setGiftName('')
     setImgUrl('')
+    setPrice(0)
     setQuantity(1)
     setShowForm(false)
     setEdit(false)
@@ -86,13 +94,15 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
     setNamePerson(randomGift.namePerson)
     setImgUrl(randomGift.img)
     setQuantity(randomGift.quantity)
+    setPrice(randomGift.price)
   }
 
-  const handleCancel = event => {
+  const handleCancel = () => {
     setShowForm(lastState => !lastState)
     setGiftName('')
     setImgUrl('')
     setQuantity(1)
+    setPrice(0)
     setShowForm(false)
     setEdit(false)
   }
@@ -121,6 +131,14 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
         onChange={handleChange}
         className={styles.mainInput}
         placeholder="URL de la imagen"
+      />
+      <input
+        type="number"
+        name="price"
+        value={price}
+        onChange={handleChange}
+        className={styles.mainInput}
+        placeholder="Precio por unidad"
       />
       <input
         type="text"
