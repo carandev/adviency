@@ -84,7 +84,7 @@ function App() {
             ))}
           </ul>}
           {
-            totalPrice !== 0 && <p>Total: ${totalPrice}</p>
+            totalPrice !== 0 && <p className={styles.totalPrice}>Total: ${totalPrice}</p>
           }
           {gifts.length === 0 && (
             <p className={styles.mainP}>No seas tacaño, regala algo!!</p>

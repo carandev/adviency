@@ -104,4 +104,6 @@
   color: #fff;
 }
 
-
+.totalPrice {
+  font-weight: bold;
+}
