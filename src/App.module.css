@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&family=Murecho:wght@300;400;700&display=swap');
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+
+  font-family: 'Murecho', sans-serif;
+  font-size: 1.5rem;
+
+  color: #fff;
+  background-image: url(assets/img/bg_image.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.mainShadow {
+  background: rgba(0, 0, 0, 0.73);
+  position: absolute;
+  width: 100vw;
+
+  height: 100vh;
+}
+
+.mainCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 320px;
+  max-height: 70vh;
+
+  padding: 2rem;
+
+  border-radius: 5px;
+
+  background: #123;
+}
+
+.mainH1 {
+  margin: 0;
+  font-size: 4rem;
+  text-align: center;
+
+  color: #b32;
+  font-family: 'Mountains of Christmas', cursive;
+}
+
+.mainH3 {
+  font-size: 2rem;
+
+  color: #fff;
+}
+
+.mainInput {
+  padding: 0.5rem 1rem;
+  outline: none;
+
+  font-size: 1.2rem;
+
+  border-radius: 5px;
+  border: #aff solid 1px;
+  background: transparent;
+  color: #fff;
+}
+
+.mainUl {
+  padding: 0;
+  max-height: 90%;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.mainUl::-webkit-scrollbar {
+  width: 2px;               /* width of the entire scrollbar */
+}
+
+.mainUl::-webkit-scrollbar-track {
+  background: #112233;        /* color of the tracking area */
+}
+
+.mainUl::-webkit-scrollbar-thumb {
+  background-color: #aaffff;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+}
+
+.mainP {
+  text-align: center;
+}
+
+.mainInputNumber {
+  margin-left: 1rem;
+
+  width: 3rem;
+
+  text-align: center;
+  font-size: 1.2rem;
+
+  border-radius: 5px;
+  border: #aff solid 1px;
+  background: transparent;
+  color: #fff;
+}
+
+

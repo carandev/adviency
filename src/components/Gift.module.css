@@ -1,0 +1,36 @@
+.mainLi {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  margin-bottom: 1rem;
+}
+
+.liContainerData {
+  display: flex;
+  align-items: center;
+}
+
+.liContainerData p {
+  margin: 0;
+}
+
+.liContainerData span {
+  display: flex;
+  flex-direction: column;
+}
+
+.liContainerData small {
+  color: #aaa;
+  font-size: .8rem;
+}
+
+.liButtons {
+  display: flex;
+}
+
+.mainImg {
+  width: 40px;
+  margin-right: 1rem;
+}
