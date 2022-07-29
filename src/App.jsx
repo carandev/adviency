@@ -11,6 +11,7 @@ function App() {
   const [edit, setEdit] = useState(false)
   const [gift, setGift] = useState({})
   const [loading, setLoading] = useState(true)
+  const [totalPrice, setTotalPrice] = useState(0)
 
   useEffect(() => {
 
@@ -24,6 +25,13 @@ function App() {
     })
 
   }, [showForm])
+
+  useEffect(() => {
+    let sumPrice = 0
+    gifts.forEach(currentGift => sumPrice += currentGift.price);
+
+    setTotalPrice(sumPrice)
+  })
 
   const handleDelete = (index) => {
     const newGifts = [...gifts]
@@ -75,6 +83,9 @@ function App() {
               />
             ))}
           </ul>}
+          {
+            totalPrice !== 0 && <p>Total: ${totalPrice}</p>
+          }
           {gifts.length === 0 && (
             <p className={styles.mainP}>No seas tacaño, regala algo!!</p>
           )}
