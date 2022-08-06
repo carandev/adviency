@@ -12,7 +12,10 @@ const Gift = ({gift, handleEdit, index, handleDelete}) => {
             className={StyleGiftContainer.mainImg}
           />
           <span>
-            <p>{gift.name} x{gift.quantity} - ${gift.price}</p>
+            <p>
+              <span className={StyleGiftContainer.titleGift}>{gift.name}</span>
+              x{gift.quantity} - ${gift.price}
+            </p>
             <small>Para: {gift.namePerson}</small>
           </span>
         </div>

@@ -19,11 +19,20 @@
 .liContainerData span {
   display: flex;
   flex-direction: column;
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+.titleGift {
+  width: 200px;
+
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .liContainerData small {
   color: #aaa;
-  font-size: .8rem;
+  font-size: .7rem;
 }
 
 .liButtons {

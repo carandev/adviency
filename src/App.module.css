@@ -9,7 +9,6 @@
   height: 100vh;
 
   font-family: 'Murecho', sans-serif;
-  font-size: 1.5rem;
 
   color: #fff;
   background-image: url(assets/img/bg_image.png);
@@ -29,7 +28,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 320px;
+  max-width: 400px;
   max-height: 70vh;
 
   padding: 2rem;
@@ -41,7 +40,7 @@
 
 .mainH1 {
   margin: 0;
-  font-size: 4rem;
+  font-size: 3rem;
   text-align: center;
 
   color: #b32;
@@ -49,7 +48,7 @@
 }
 
 .mainH3 {
-  font-size: 2rem;
+  text-align: center;
 
   color: #fff;
 }
@@ -106,4 +105,5 @@
 
 .totalPrice {
   font-weight: bold;
+  text-align: center;
 }
