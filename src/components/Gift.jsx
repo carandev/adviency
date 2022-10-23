@@ -1,15 +1,16 @@
-import React from 'react';
-import StyleGiftContainer from './Gift.module.css';
+import React from 'react'
 
-const Gift = ({gift, handleEdit, index, handleDelete}) => {
+import StyleGiftContainer from './Gift.module.css'
+
+const Gift = ({ gift, handleEdit, index, handleDelete }) => {
   return (
     <>
       <li key={gift.id} className={StyleGiftContainer.mainLi}>
         <div className={StyleGiftContainer.liContainerData}>
           <img
-            src={gift.img}
             alt="Product"
             className={StyleGiftContainer.mainImg}
+            src={gift.img}
           />
           <span>
             <p>

@@ -1,4 +1,4 @@
-const randomGifts =  [
+const randomGifts = [
   {
     name: 'Teclado gamer',
     namePerson: 'Lucia',
@@ -40,7 +40,7 @@ const randomGifts =  [
     quantity: 1,
     price: 50_000,
     img: 'https://imagessl1.casadellibro.com/a/l/t7/01/9788408083801.jpg'
-  },
+  }
 ]
 
 export default randomGifts

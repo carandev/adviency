@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import styles from "./FormToAdd.module.css";
-import randomGifts from "../randomGifts";
-import api from "../service/api";
+import React, { useEffect, useState } from 'react'
 
-const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
+import randomGifts from '../randomGifts'
+import api from '../service/api'
 
+import styles from './FormToAdd.module.css'
+
+const FormToAdd = ({ setShowForm, edit, gift, setEdit }) => {
   const [giftName, setGiftName] = useState('')
   const [quantity, setQuantity] = useState(1)
   const [imgUrl, setImgUrl] = useState('')
@@ -19,18 +20,18 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
       setPrice(gift.price)
       setNamePerson(gift.namePerson)
     }
-
   }, [edit, gift])
 
   const handleChange = event => {
-    const {value, name} = event.target
+    const { value, name } = event.target
+
     if (name === 'giftName') {
       setGiftName(value)
     } else if (name === 'quantity') {
       setQuantity(value)
     } else if (name === 'imgUrl') {
       setImgUrl(value)
-    } else if (name === 'namePerson'){
+    } else if (name === 'namePerson') {
       setNamePerson(value)
     } else {
       setPrice(value)
@@ -38,9 +39,9 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
   }
 
   const handleClick = async () => {
-    let newName = giftName.trim()
+    const newName = giftName.trim()
 
-    let giftsLocalStorage = await api.getGifts()
+    const giftsLocalStorage = await api.getGifts()
 
     const gift = {
       id: Date.now(),
@@ -59,7 +60,6 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
       setQuantity(1)
       setShowForm(false)
     }
-
   }
 
   const handleSubmit = (event) => {
@@ -89,7 +89,8 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
   }
 
   const handleRandom = () => {
-   const randomGift = randomGifts[Math.floor(Math.random() * randomGifts.length)]
+    const randomGift = randomGifts[Math.floor(Math.random() * randomGifts.length)]
+
     setGiftName(randomGift.name)
     setNamePerson(randomGift.namePerson)
     setImgUrl(randomGift.img)
@@ -108,69 +109,68 @@ const FormToAdd = ({setShowForm, edit, gift, setEdit}) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={styles.mainForm}>
+    <form className={styles.mainForm} onSubmit={handleSubmit}>
       <input
-        type="text"
+        autoFocus
+        className={styles.mainInput}
         name="giftName"
+        placeholder="Nombre del regalo"
+        type="text"
         value={giftName}
         onChange={handleChange}
-        className={styles.mainInput}
-        placeholder="Nombre del regalo"
-        autoFocus
       />
       <button
-        onClick={handleRandom}
         className="mainButton"
+        onClick={handleRandom}
       >
         Regalo Aleatorio
       </button>
       <input
-        type="text"
+        className={styles.mainInput}
         name="imgUrl"
+        placeholder="URL de la imagen"
+        type="text"
         value={imgUrl}
         onChange={handleChange}
-        className={styles.mainInput}
-        placeholder="URL de la imagen"
       />
       <input
-        type="number"
+        className={styles.mainInput}
         name="price"
+        placeholder="Precio por unidad"
+        type="number"
         value={price}
         onChange={handleChange}
-        className={styles.mainInput}
-        placeholder="Precio por unidad"
       />
       <input
-        type="text"
+        className={styles.mainInput}
         name="namePerson"
+        placeholder="¿Para quién?"
+        type="text"
         value={namePerson}
         onChange={handleChange}
-        className={styles.mainInput}
-        placeholder="¿Para quién?"
       />
       <input
-        type="number"
-        name="quantity"
         className={styles.mainInputNumber}
+        name="quantity"
+        type="number"
         value={quantity}
         onChange={handleChange}
       />
       <div>
-        {edit ?
-          <button className="mainButton" onClick={handleEdit}>Editar</button>
-          :
-          <button className="mainButton" onClick={handleClick}>Agregar</button>
+        {edit
+          ? <button className="mainButton" onClick={handleEdit}>Editar</button>
+          : <button className="mainButton" onClick={handleClick}>Agregar</button>
         }
         <button
-          onClick={handleCancel}
           className="deleteButton"
           type="button"
+          onClick={handleCancel}
         >
           Cancelar
         </button>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default FormToAdd;
+export default FormToAdd

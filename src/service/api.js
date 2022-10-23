@@ -1,8 +1,8 @@
 const api = {
-  getGifts : async() => {
+  getGifts: async () => {
     return await JSON.parse(localStorage.getItem('gifts'))
   },
-  postGifts : gifts => {
+  postGifts: gifts => {
     localStorage.setItem('gifts', JSON.stringify(gifts))
   }
 }
