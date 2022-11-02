@@ -5,7 +5,7 @@ import api from '../service/api'
 
 import styles from './FormToAdd.module.css'
 
-const FormToAdd = ({ setShowForm, edit, gift, setEdit }) => {
+const FormToAdd = ({ setShowForm, edit, gift, setEdit, duplicate }) => {
   const [giftName, setGiftName] = useState('')
   const [quantity, setQuantity] = useState(1)
   const [imgUrl, setImgUrl] = useState('')
@@ -13,14 +13,14 @@ const FormToAdd = ({ setShowForm, edit, gift, setEdit }) => {
   const [price, setPrice] = useState(0)
 
   useEffect(() => {
-    if (edit) {
+    if (edit || duplicate) {
       setGiftName(gift.name)
       setQuantity(gift.quantity)
       setImgUrl(gift.img)
       setPrice(gift.price)
       setNamePerson(gift.namePerson)
     }
-  }, [edit, gift])
+  }, [edit, gift, duplicate])
 
   const handleChange = event => {
     const { value, name } = event.target

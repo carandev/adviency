@@ -9,6 +9,7 @@ function App () {
   const [gifts, setGifts] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [edit, setEdit] = useState(false)
+  const [duplicate, setDuplicate] = useState(false)
   const [gift, setGift] = useState({})
   const [loading, setLoading] = useState(true)
   const [totalPrice, setTotalPrice] = useState(0)
@@ -56,11 +57,17 @@ function App () {
     setShowForm(true)
   }
 
+  const handleDuplicate = index => {
+    setGift(gifts[index])
+    setDuplicate(true)
+    setShowForm(true)
+  }
+
   return (
     <main className={styles.main}>
       {showForm && <>
         <div className={styles.mainShadow}> </div>
-        <FormToAdd edit={edit} gift={gift} setEdit={setEdit} setShowForm={setShowForm} />
+        <FormToAdd duplicate={duplicate} edit={edit} gift={gift} setEdit={setEdit} setShowForm={setShowForm} />
       </>}
       {loading
         ? 'cargando'
@@ -79,6 +86,7 @@ function App () {
                 key={index}
                 gift={gift}
                 handleDelete={handleDelete}
+                handleDuplicate={handleDuplicate}
                 handleEdit={handleEdit}
                 index={index}
               />

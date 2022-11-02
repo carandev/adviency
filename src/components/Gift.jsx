@@ -2,7 +2,7 @@ import React from 'react'
 
 import StyleGiftContainer from './Gift.module.css'
 
-const Gift = ({ gift, handleEdit, index, handleDelete }) => {
+const Gift = ({ gift, handleEdit, index, handleDelete, handleDuplicate }) => {
   return (
     <>
       <li key={gift.id} className={StyleGiftContainer.mainLi}>
@@ -26,6 +26,12 @@ const Gift = ({ gift, handleEdit, index, handleDelete }) => {
             onClick={() => handleEdit(index)}
           >
             E
+          </button>
+          <button
+            className="mainButton"
+            onClick={() => handleDuplicate(index)}
+          >
+            D
           </button>
           <button
             className="deleteButton"

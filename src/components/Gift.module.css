@@ -1,6 +1,6 @@
 .mainLi {
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
   align-items: center;
   width: 100%;
 
@@ -24,7 +24,7 @@
 }
 
 .titleGift {
-  width: 200px;
+  width: 150px;
 
   white-space: nowrap;
   overflow: hidden;
@@ -37,6 +37,7 @@
 
 .liButtons {
   display: flex;
+  gap: .5rem;
 }
 
 .mainImg {
